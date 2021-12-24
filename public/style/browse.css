@@ -1,0 +1,150 @@
+body{
+    min-width: 60em;
+}
+span{
+    cursor: default;
+}
+.gameGallery{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: darkgray;
+    text-align: center;
+}
+
+.gameInstance{
+    border-radius: 10px;
+    padding: 5px;
+    background-color: bisque;
+    position: relative;
+    display: inline-block;
+    width: 350px;
+    height: 100px;
+    margin: 1em;
+}
+
+.gameInstance button{
+    padding: 2px;
+    border-radius: 5px;
+    border: 0;
+    transition: all 0.2s;
+}
+
+.gameInstance button:enabled:hover{
+    background-color: cadetblue;
+}
+
+.gameInstance button:active{
+    background-color: cornflowerblue;
+}
+
+.gameInfoContainer{
+    display: block;
+    width: 100%;
+    height: 20px;
+}
+
+.gameTitle{
+    float: left;
+}
+
+.host{
+    float: right;
+}
+.topBar{
+    display: block;
+}
+.gameInstance button{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: -moz-available;
+}
+
+#extraInfo{
+    text-align: center;
+}
+#extraInfo button{
+    padding: 10px;
+    font-size: 12px;
+}
+#pageOverlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    vertical-align: middle;
+}
+#overlayWindow{
+    position: relative;
+    width: 40em;
+    height: 30em;
+    margin: auto;
+    background-color: white;
+    border-radius: 1em;
+}
+#tooltip{
+    position: absolute;
+    display: block;
+    font-size: 0.7em;
+}
+fieldset{
+    border: none;
+    margin: 0.5em;
+}
+
+fieldset > div{
+    padding: 1.5em;
+}
+
+fieldset > .horizontalFlex {
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+.horizontalFlex{
+    margin: 10px;
+}
+
+.horizontalFlex > div{
+    display: inline-flex;
+}
+label{
+    display: inline-block;
+    float: left;
+    text-align: right;
+    width: 100px;
+}
+
+legend{
+    margin: auto;
+}
+
+.keyboardInput{
+    border: 0.3em solid;
+    border-color: gray;
+    transition: 0.2s;
+    height: 1.5em;
+}
+
+.keyboardInput:hover{
+    border: 0.4em solid;
+    border-color: darkgray;
+}
+
+.keyboardInput:focus{
+    border-color: black;
+    border: 0.4em solid;
+    outline: none;
+}
+
+select{
+    min-width: 12em;
+}

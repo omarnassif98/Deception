@@ -1,0 +1,25 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: cornflowerblue;
+}
+
+.content_bubble{
+    background-color: rgba(255, 248, 220, 0.527);
+    text-align: center;
+}
+
+.text_entry{
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    border-bottom: 2px solid black;
+    transition: all 0.3s;
+    width: 12em;
+}
+
+.text_entry:focus{
+    border-bottom: 2px solid #FC814A;
+    width: 16em;
+    margin-left: 1.75em;
+}

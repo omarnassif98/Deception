@@ -1,0 +1,31 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "port": 5555
+    },
+    "functions": {
+      "port": 5554
+    },
+    "database": {
+      "port": 5553
+    },
+    "hosting": {
+      "port": 5552
+    },
+    "ui": {
+      "enabled": true,
+      "port": 5551
+    }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

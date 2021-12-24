@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <body>
+        <div id='navbar'>
+            <div class="navbar_item">
+                <span>Option 1</span>
+            </div>
+            <div class="navbar_item">
+                <span>Option 2</span>
+            </div>
+            <div class="navbar_item">
+                <span>Option 3</span>
+            </div>
+            <div class="navbar_item" style="margin-left: auto; order: 2;" onclick="window.location.href='#modal'">
+                <span>Login/Signup</span>
+            </div>
+        </div id='navbar'>
+
+        <div id='modal'>
+            <div id='modal_placeholder'>
+                <div id='modal_container'>
+                    <div id="login_dialogue">
+                        <header>
+                            <div style="margin: 20px;">
+                                <a id="modal_close" href="#" style="font-size: large; display: block; float: right;">X</a>
+                                <span style="font-size: x-large">Sign in</span>
+                            </div>
+                            <hr>
+                        </header>
+                        <div>
+                            <div id='login_form' class="form_container">
+                                <label for="login_email" class="modal_input">Email:</label>
+                                <input type="text" name="login_email" id="login_email_input" class="modal_input text_entry">
+                                <label for="login_pass" class="modal_input">Password:</label>
+                                <input type="password" name="login_pass" id="login_pass_input" class="modal_input text_entry">
+                            </div>
+
+                            <button style="float: right; margin-right: 3em;" onclick="alert('TODO: Grow some patience')">Log In</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

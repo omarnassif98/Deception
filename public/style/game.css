@@ -1,0 +1,138 @@
+#chat{
+    background: beige;
+    width: 20em;
+    position: fixed;
+    height: 100%;
+}
+
+#recipientSelect{
+    background: bisque;
+    text-align: center;
+}
+
+#otherPlayers{
+    width: 80%;
+    padding: 1em;
+}
+
+#inputArea{
+    position: fixed;
+    bottom: 0;
+    width: 20em;
+    display: flex;
+    justify-content: space-around;
+}
+
+#inputArea > textarea{
+    resize: none;
+}
+
+#inputArea > button{
+    padding: 1em;
+}
+
+#gameMap{
+    height: 100%;
+    width: 100%;
+}
+#gameArea{
+    border: 5px solid black;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    left: 20em;
+    bottom: 0;
+}
+#overlayArea{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+#backdrop{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: all;
+}
+#overlayBox{
+    background-color: wheat;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    margin: auto;
+    outline: black 10px;
+    
+}
+
+#sendOrdersButton{
+    background-color: white;
+    outline: black 2px;
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+    pointer-events: all;
+    position: absolute;
+}
+
+#sendOrdersButton:hover{
+    background-color: burlywood;
+    outline: black 3px;
+}
+
+#sendOrdersButton:active{
+    background-color: chocolate;
+}
+
+.province{
+    transition: fill 0.5s;
+    stroke-width:2px;
+    z-index: -1;
+    stroke: bisque;
+    vector-effect: non-scaling-stroke;
+}
+
+.land{
+    fill: lightgray;
+}
+
+.ocean{
+    fill: skyblue;
+}
+.enabledProvince{
+    stroke: black;
+}
+.enabledProvince:hover{
+    stroke-width: 2px;
+    fill: lightslategray !important;
+}
+.disabledProvince:not(:hover){
+    fill: gray !important;
+    stroke-width: 2px;
+}
+
+.tank{
+    stroke: black;
+    stroke-width: 1px;
+}
+
+#PreGame{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#PreGame > * {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+}
