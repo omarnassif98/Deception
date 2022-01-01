@@ -1,13 +1,22 @@
 html, body{
+    height: 100%;
+}
+body{
     margin: 0;
     padding: 0;
     background-color: cornflowerblue;
 }
-
+footer{
+    text-align: center;
+}
 .content_bubble{
     background-color: rgba(255, 248, 220, 0.527);
     text-align: center;
+    display: flex;
+    margin-top: 20px;
+    flex-flow: column;
 }
+
 
 .text_entry{
     background-color: transparent;

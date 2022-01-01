@@ -5,7 +5,11 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites" : [{
+      "source" : "/browse",
+      "destination" : "/browse_listings.html"
+    }]
   },
   "emulators": {
     "auth": {
