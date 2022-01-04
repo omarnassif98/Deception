@@ -43,10 +43,11 @@
     display: flex;
 }
 
-#chat_area{
+#side_panel{
     height: 100%;
     width: 40%;
     border: 1px solid orange;
+    overflow-y: auto;
 }
 
 #game_area{
@@ -102,28 +103,21 @@
     background-color: chocolate;
 }
 
-.province{
+path{
     transition: fill 0.5s;
-    stroke-width:2px;
-    z-index: -1;
-    stroke: bisque;
+    stroke-width:1px;
+    stroke: #F0FFFF;
 }
 
-.land{
-    fill: lightgray;
+.enabled_province{
+    stroke: black !important;
+    stroke-width: 2px !important;
 }
-
-.ocean{
-    fill: skyblue;
-}
-.enabledProvince{
-    stroke: black;
-}
-.enabledProvince:hover{
-    stroke-width: 2px;
+.enabled_province:hover{
+    stroke-width: 3px !important;
     fill: lightslategray !important;
 }
-.disabledProvince:not(:hover){
+.disabled_province:not(:hover){
     fill: gray !important;
     stroke-width: 2px;
 }

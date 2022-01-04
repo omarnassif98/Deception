@@ -6,10 +6,15 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites" : [{
-      "source" : "/browse",
-      "destination" : "/browse_listings.html"
-    }]
+    "rewrites" : [
+      {
+        "source" : "/browse",
+        "destination" : "/browse_listings.html"
+      },
+      {
+        "source" : "/sandbox",
+        "destination" : "/sandbox.html"
+      }]
   },
   "emulators": {
     "auth": {

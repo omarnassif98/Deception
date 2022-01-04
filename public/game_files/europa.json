@@ -38,10 +38,11 @@
     ],
     "nation_info": {
       "AUS": {
-        "color": "brown",
+        "color" : "#A52A2A",
+        "stroke_color" : "#5A1C1C",
         "cores": [],
         "defeats": [],
-        "proper_name": "Austria-Hungary",
+        "full_name": "The Austro-Hungarian Empire",
         "provinces": [
           "TRI",
           "TYR",
@@ -60,10 +61,11 @@
         ]
       },
       "ENG": {
-        "color": "red",
+        "color" : "#DC143C",
+        "stroke_color" : "#761125",
         "cores": [],
         "defeats": [],
-        "proper_name": "England",
+        "full_name": "The United Kingdoms",
         "provinces": [
           "LON",
           "WAL",
@@ -76,14 +78,15 @@
         "troops_deployed": []
       },
       "FRA": {
-        "color": "deepskyblue",
+        "color" : "#00CCFF",
+        "stroke_color" : "#016C89",
         "cores": [
           "PAR",
           "BRE",
           "MAR"
         ],
         "defeats": [],
-        "proper_name": "France",
+        "full_name": "The French Republic",
         "provinces": [
           "PAR",
           "BRE",
@@ -100,10 +103,11 @@
         ]
       },
       "GER": {
-        "color": "orange",
+        "color" : "#F58025",
+        "stroke_color" : "#B86321",
         "cores": [],
         "defeats": [],
-        "proper_name": "Germany",
+        "full_name": "The German Empire",
         "provinces": [
           "KIE",
           "RUH",
@@ -120,14 +124,15 @@
         ]
       },
       "ITA": {
-        "color": "green",
+        "color" : "#009966",
+        "stroke_color" : "#08543A",
         "cores": [
           "ROM",
           "VEN",
           "NAP"
         ],
         "defeats": [],
-        "proper_name": "Italy",
+        "full_name": "The Italian Empire",
         "provinces": [
           "ROM",
           "TUS",
@@ -145,10 +150,11 @@
         ]
       },
       "RUS": {
-        "color": "white",
+        "color" : "#F8F8FF",
+        "stroke_color" : "#7D8289",
         "cores": [],
         "defeats": [],
-        "proper_name": "Russia",
+        "full_name": "The Russian Empire",
         "provinces": [
           "SEV",
           "UKR",
@@ -166,10 +172,11 @@
         ]
       },
       "TUR": {
-        "color": "gold",
+        "color" : "#CFB53B",
+        "stroke_color" : "#9C8B31",
         "cores": [],
         "defeats": [],
-        "proper_name": "The Ottomans",
+        "full_name": "The Ottoman Empire",
         "provinces": [
           "IST",
           "ANK",
@@ -186,6 +193,32 @@
       }
     },
     "province_info": {
+      "NOR" : {
+        "neighbors" : [
+
+        ],
+        "owner" : null,
+        "token_location": {
+          "x": "579.9825439453125",
+          "y": "474.2771453857422"
+        },
+        "troop_presence" : null,
+        "region_type" : "land",
+        "full_name" : "Norway"
+      },
+      "DEN" : {
+        "neighbors" : [
+
+        ],
+        "owner" : null,
+        "token_location": {
+          "x": "579.9825439453125",
+          "y": "474.2771453857422"
+        },
+        "troop_presence" : null,
+        "region_type" : "land",
+        "full_name" : "Denmark"
+      },
       "ALB": {
         "neighbors": [
           "GRE",

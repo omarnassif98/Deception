@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style/sitewide.css">
+    <link rel="stylesheet" href="style/navbar.css">
+    <link rel="stylesheet" href="style/game.css">
+    <link rel="stylesheet" href="style/sandbox.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="scripts/FirebaseInitializer.js"></script>
+    <script src="scripts/FirebaseAuthManager.js"></script>
+    <script src="scripts/Helper.js"></script>
+    <script src="scripts/Navbar.js"></script>
+    <script src="scripts/MapManager.js"></script>
+    <script src="scripts/MapSandbox.js"></script>
+    <title>Deception</title>
+</head>
+<body>
+    <div class="content_bubble" id="game_bubble">
+        <h1 style="margin: 0; height: 10%;">Map Sandbox</h1>
+        <div id="game_wrapper">
+            <div id="side_panel">
+                <div class="editor_option" id='master_panel'>
+                    <div class="editor_option" id='province_editor_controls'>
+                        <h3 id="selected_province_id">Select Province...</h3>
+                        <div class="editor_option">
+                            <label for="province_full_name">Province Name</label>
+                            <input type="text" name="province_full_name" id="province_full_name" disabled>
+                        </div>
+                        <div class="editor_option">
+                            <label for="province_owner">Province Owner</label>
+                            <select name="province_owner" id="province_owner" disabled>
+                                <option value="N/A">No Owner</option>
+                            </select>
+                        </div>
+                        <div class="editor_option">
+                            <label for="province_troops">Province Occupied</label>
+                            <input type="checkbox" name="province_troops" id="province_troops" disabled>
+                        </div>
+                        <div class="editor_option">
+                            <label for="province_is_key">Stronghold?</label>
+                            <input type="checkbox" name="province_is_key" id="province_is_key" disabled>
+                        </div>
+                        <div class="editor_option">
+                            <label for="center_of_power">Center of Power</label>
+                            <div name="center_of_power" style="display: inline;">
+                                
+                                <div class="editor_option">
+                                    <label for="cop_x">X</label>
+                                    <input type="text" name="cop_x" id="cop_x" disabled>
+                                </div>
+                                
+                                <div class="editor_option">
+                                    <label for="cop_y">Y</label>
+                                    <input type="text" name="cop_y" id="cop_y" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="editor_option">
+                        <h3>Sandbox options</h3>
+                        <div class="editor_option">
+                            <label for="key_visualize">View All Centers of Power</label>
+                            <input type="checkbox" name="key_visualize" id="key_visualize">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="game_area">
+
+            </div>   
+        </div>
+    </div>
+    <footer>
+        <span>Omzooooooooooooz 2022</span>
+    </footer>
+</body>
+</html>
