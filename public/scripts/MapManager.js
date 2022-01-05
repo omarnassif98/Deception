@@ -6,8 +6,8 @@
 let province_objects = {};
 var map_metadata = null;
 let user_settings = {'scroll_sensitivity' : 0.01};
-var tank_graphic = null;
-let tank_graphic_holder = null;
+let graphics = {'tank' : null, 'star' : null};
+let graphic_holder = {'tank' : {}, 'star' : {}};
 let province_object_metadata = {'enabled':[], 'disabled':[]}
 function setup_game(){
     loadMap().then().then(loadMetadata).then(loadExtraGraphics).then(() => document.dispatchEvent(new CustomEvent('map_setup_complete')));
@@ -136,19 +136,21 @@ function loadMetadata(){
 function loadExtraGraphics(){
     let map_object = document.getElementById('gameMap');
     let star_graphic_holder = document.createElementNS("http://www.w3.org/2000/svg","g");
+    star_graphic_holder.id = 'star_token_holder';
     map_object.append(star_graphic_holder);
     return new Promise((resolve) => {
         console.log(map_metadata);
         get_text_resource('/graphics/star.svg').then(raw_svg => {
             let parser = new DOMParser();
             let map_dom = parser.parseFromString(raw_svg, 'image/svg+xml');
-            let content = map_dom.getElementById('star');
+            graphics.star = map_dom.getElementById('star');
             map_metadata.key_provinces.forEach(province_id => {
                 try{
-                    let star_object = content.cloneNode(deep=true);
+                    let star_object = graphics.star.cloneNode(deep=true);
                     star_object.setAttribute('x', map_metadata.province_info[province_id].token_location.x);
                     star_object.setAttribute('y', map_metadata.province_info[province_id].token_location.y);
                     star_graphic_holder.append(star_object);
+                    graphic_holder.star[province_id] = star_object;
                 }catch{
                     console.log(`${province_id} is not really a province`);
                 }
@@ -175,17 +177,13 @@ function emptyProvinceStateList(state){
 }
 
 function changeProvinceState(province_id, state){
-    console.log(`${province_id} is now ${state}`);
     province_objects[province_id].classList.add(state + '_province');
     province_object_metadata[state].push(province_id);
-    console.log(province_id + ' list has been added to ' + state + ' list');
 }
 
 function changeMultipleProvinceStates(province_list, state){
     emptyProvinceStateList(state);
-    console.log(province_list);
     province_list.forEach(province_id => changeProvinceState(province_id, state));
-
 }
 
 function focusProvince(province_id){
