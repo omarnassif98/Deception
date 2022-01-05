@@ -8,7 +8,7 @@ var map_metadata = null;
 let user_settings = {'scroll_sensitivity' : 0.01};
 var tank_graphic = null;
 let tank_graphic_holder = null;
-let enabled_provinces = []
+let province_object_metadata = {'enabled':[], 'disabled':[]}
 function setup_game(){
     loadMap().then().then(loadMetadata).then(loadExtraGraphics).then(() => document.dispatchEvent(new CustomEvent('map_setup_complete')));
 }
@@ -99,7 +99,7 @@ function loadMap(){
                     province_objects[province_object.id] = province_object;
                     
                     province_object.addEventListener('mouseup', () => {
-                        if(!mouse_settings.user_is_panning && enabled_provinces.includes(province_object.id)){
+                        if(!mouse_settings.user_is_panning && (province_object_metadata.enabled.includes(province_object.id) || province_object_metadata.debug)){
                             document.dispatchEvent(new CustomEvent('province_select', {'detail':province_object.id}));                        }
                     });
                     
@@ -159,20 +159,40 @@ function loadExtraGraphics(){
     });
 }
 
-function emptyEnabledList(){
-    while(enabled_provinces.length > 0){
-        let province_to_disable = province_objects[enabled_provinces.pop()];
-        province_to_disable.classList.remove('enabled_province');
+function removeProvinceState(province_id, state, update_list = true){
+    console.log(`${province_id} is no longer ${state}`);
+    let province_to_disable = province_objects[province_id];
+    province_to_disable.classList.remove(state + '_province');
+    if(update_list){
+        console.log(province_id + ' list has been removed from ' + state + ' list');
+        province_object_metadata[state] = province_object_metadata[state].filter(state_province_id => state_province_id != province_id);
     }
 }
 
-function enableProvinces(province_list){
-    emptyEnabledList();
+function emptyProvinceStateList(state){
+    province_object_metadata[state].forEach(province_id => removeProvinceState(province_id, state,false));
+    province_object_metadata[state] = [];
+}
+
+function changeProvinceState(province_id, state){
+    console.log(`${province_id} is now ${state}`);
+    province_objects[province_id].classList.add(state + '_province');
+    province_object_metadata[state].push(province_id);
+    console.log(province_id + ' list has been added to ' + state + ' list');
+}
+
+function changeMultipleProvinceStates(province_list, state){
+    emptyProvinceStateList(state);
     console.log(province_list);
-    province_list.forEach(province_id => {
-        province_objects[province_id].classList.add('enabled_province');
-        enabled_provinces.push(province_id);
-    })
+    province_list.forEach(province_id => changeProvinceState(province_id, state));
+
+}
+
+function focusProvince(province_id){
+    let non_disabled = [...map_metadata.province_info[province_id].neighbors];
+    changeMultipleProvinceStates(non_disabled, 'enabled');
+    non_disabled.push(province_id);
+    changeMultipleProvinceStates(Array.from(Object.keys(map_metadata.province_info)).filter(other_province_id => !non_disabled.includes(other_province_id)), 'disabled');
 }
 
 window.addEventListener('load', setup_game);

@@ -55,54 +55,6 @@
     width: 60%;
 }
 
-#overlayArea{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    pointer-events: none;
-    user-select: none;
-}
-
-#backdrop{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: all;
-}
-#overlayBox{
-    background-color: wheat;
-    width: 50%;
-    height: 50%;
-    position: relative;
-    margin: auto;
-    outline: black 10px;
-    
-}
-
-#sendOrdersButton{
-    background-color: white;
-    outline: black 2px;
-    height: 50px;
-    width: 100px;
-    text-align: center;
-    align-items: center;
-    pointer-events: all;
-    position: absolute;
-}
-
-#sendOrdersButton:hover{
-    background-color: burlywood;
-    outline: black 3px;
-}
-
-#sendOrdersButton:active{
-    background-color: chocolate;
-}
-
 path{
     transition: fill 0.5s;
     stroke-width:1px;
@@ -117,10 +69,12 @@ path{
     stroke-width: 3px !important;
     fill: lightslategray !important;
 }
-.disabled_province:not(:hover){
+.disabled_province{
     fill: gray !important;
     stroke-width: 2px;
+    stop-color: #F0FFFF !important;
 }
+
 
 .tank{
     stroke: black;
