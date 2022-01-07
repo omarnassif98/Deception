@@ -35,12 +35,16 @@
                             </select>
                         </div>
                         <div class="editor_option">
-                            <label for="province_troops">Province Occupied</label>
-                            <input type="checkbox" name="province_troops" id="province_troops" disabled>
-                        </div>
-                        <div class="editor_option">
                             <label for="province_is_key">Stronghold?</label>
                             <input type="checkbox" name="province_is_key" id="province_is_key" disabled>
+                        </div>
+                        <div class="editor_option">
+                            <label for="province_troops">Province Occupied</label>
+                            <select name="province_troops" id="province_troops" disabled>
+                                <option value="N/A">None</option>
+                                <option value="land">Infantry</option>
+                                <option value="water">Naval</option>
+                            </select>
                         </div>
                         <div class="editor_option">
                             <label for="center_of_power">Center of Power</label>
@@ -59,11 +63,11 @@
                         </div>
 
                             <div class="editor_option">
-                                <label for="province_neighbors_list">X</label>
+                                <label for="province_neighbors_list">Province Neighbors</label>
                                 <ul id="province_neighbors_list" name = "province_neighbors_list">
 
                                 </ul>
-                                <button onclick="editProvinceNeighbors()">Edit Neighbors</button>
+                                <button onclick="document.getElementById('province_editor_controls').dispatchEvent(new CustomEvent('input_mode_change', {detail:'neighbor_edit'}))">Edit Neighbors</button>
                             </div>
                             
                         
@@ -74,6 +78,12 @@
                         <div class="editor_option">
                             <label for="key_visualize">View All Centers of Power</label>
                             <input type="checkbox" name="key_visualize" id="key_visualize" disabled>
+                        </div>
+                        <div class="editor_option">
+                            <label for="add_muliple_provinces">Add Multiple Nations</label>
+                            <div class="editor_option" name='add_muliple_provinces' id="add_muliple_provinces">
+                            </div>
+                            <button onclick="document.getElementById('province_editor_controls').dispatchEvent(new CustomEvent('input_mode_change', {detail:'multiple_province_edit'}))">Paint The Map</button>
                         </div>
                     </div>
                     <button onclick="exportMetadata()">Export JSON</button>

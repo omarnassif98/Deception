@@ -12,40 +12,19 @@ function deleteStar(province_id){
     delete graphic_holder.star[province_id];
 }
 
-function updateProvinceRender(province_id){
-    let relevant_province_info = map_metadata.province_info[province_id];
-    console.log(relevant_province_info);
-    if(relevant_province_info.owner != 'N/A'){
-        console.log('SHOULD BE COLORING');
-        province_objects[province_id].style.fill = map_metadata.nation_info[relevant_province_info.owner].color;
-        province_objects[province_id].style.stroke = map_metadata.nation_info[relevant_province_info.owner].stroke_color
-    }
-    
-    if(!graphic_holder.star[province_id] && map_metadata.key_provinces.includes(province_id)){
-        createAdditionalStar(province_id);
-    }else if(graphic_holder.star[province_id] && !map_metadata.key_provinces.includes(province_id)){
-        deleteStar(province_id);
-    }else if(graphic_holder.star[province_id]){
-        graphic_holder.star[province_id].setAttribute('x', relevant_province_info.token_location.x);
-        graphic_holder.star[province_id].setAttribute('y', relevant_province_info.token_location.y);
-    }
-    document.dispatchEvent(new CustomEvent('province_select', {'detail':province_id}));
-}
+
 
 
 
 document.addEventListener('map_setup_complete', () => {
     console.log('STEP 4');
     province_object_metadata.debug = true;
-    Array.from(document.getElementsByTagName('select')).forEach(selection_object =>  {
-        console.log('Select found');
-        Object.keys(map_metadata.nation_info).forEach(nation_id => {
-            let value_object = document.createElement('option');
-            value_object.value=nation_id;
-            value_object.innerHTML=map_metadata.nation_info[nation_id].full_name;
-            selection_object.appendChild(value_object);
-            console.log(`added value for ${nation_id}`); 
-        });
+    let owner_selector = document.getElementById('province_owner');
+    Object.keys(map_metadata.nation_info).forEach(nation_id => {
+        let value_object = document.createElement('option');
+        value_object.value=nation_id;
+        value_object.innerHTML=map_metadata.nation_info[nation_id].full_name;
+        owner_selector.appendChild(value_object);
     });
     changeMultipleProvinceStates(Object.keys(province_objects), 'enabled');
     var selected_province_id = null;
@@ -73,9 +52,9 @@ document.addEventListener('map_setup_complete', () => {
         let relevant_province_info = null;
     
         province_editor.querySelector('#province_full_name').value = '';
-        province_editor.querySelector('#province_owner').value = '';
+        province_editor.querySelector('#province_owner').value = 'N/A';
         province_editor.querySelector('#province_is_key').checked = false;
-        province_editor.querySelector('#province_troops').checked = false;
+        province_editor.querySelector('#province_troops').value = 'N/A';
         province_editor.querySelector('#cop_x').value = '';
         province_editor.querySelector('#cop_y').value = '';
         while(province_editor.querySelector('#province_neighbors_list').children.length > 0){
@@ -91,14 +70,14 @@ document.addEventListener('map_setup_complete', () => {
         province_editor.querySelector('#province_full_name').disabled = false;
         province_editor.querySelector('#province_owner').disabled = (relevant_province_info.region_type == 'water');
         province_editor.querySelector('#province_is_key').disabled = (relevant_province_info.region_type == 'water');
-        province_editor.querySelector('#province_troops').disabled = (relevant_province_info.region_type == 'water') || !(relevant_province_info.owner);
+        province_editor.querySelector('#province_troops').disabled = (relevant_province_info.region_type == 'water') || !((relevant_province_info.owner) && (map_metadata.key_provinces.includes(selected_province_id)));
         province_editor.querySelector('#cop_x').disabled = false;
         province_editor.querySelector('#cop_y').disabled = false;
         
         province_editor.querySelector('#province_full_name').value = relevant_province_info.full_name;
-        province_editor.querySelector('#province_owner').value = (relevant_province_info.owner)?relevant_province_info.owner:'N/A';
+        province_editor.querySelector('#province_owner').value = relevant_province_info.owner;
         province_editor.querySelector('#province_is_key').checked = map_metadata.key_provinces.includes(selected_province_id);
-        province_editor.querySelector('#province_troops').checked = (relevant_province_info.troop_presence);
+        province_editor.querySelector('#province_troops').value = relevant_province_info.troop_presence;
         province_editor.querySelector('#cop_x').value = relevant_province_info.token_location.x;
         province_editor.querySelector('#cop_y').value = relevant_province_info.token_location.y;
     
@@ -107,12 +86,26 @@ document.addEventListener('map_setup_complete', () => {
         });        
     }
     
-    var edit_mode = 'province_edit';
+    var current_edit_mode = 'province_edit';
     var original_province_id = null;
-
-
+    var paint_nation_id = 'N/A';
+    let create_radio = (nation_id, custom_label = null) => {
+        let wrapper_div = document.createElement('div');
+        wrapper_div.classList.add('radio_input_wrapper');
+        let nation_radio_button = document.createElement('input');
+        nation_radio_button.setAttribute('type', 'radio');
+        nation_radio_button.setAttribute('name', 'nation_radio');
+        nation_radio_button.addEventListener('click', () => paint_nation_id = nation_id);
+        let nation_radio_label = document.createElement('span');
+        nation_radio_label.innerHTML = (custom_label)?custom_label:map_metadata.nation_info[nation_id].full_name;
+        wrapper_div.appendChild(nation_radio_button);
+        wrapper_div.appendChild(nation_radio_label);
+        document.getElementById('add_muliple_provinces').appendChild(wrapper_div);
+    }
+    create_radio('N/A', 'Unclaimed');
+    Object.keys(map_metadata.nation_info).forEach(nation_id => {create_radio(nation_id)});
     document.addEventListener('province_select', (event_data) => {
-        switch(edit_mode){
+        switch(current_edit_mode){
             case 'province_edit':
                 populateProvinceEditor(event_data.detail);
                 break;
@@ -130,47 +123,52 @@ document.addEventListener('map_setup_complete', () => {
                         map_metadata.province_info[original_province_id].neighbors.push(event_data.detail);
                     }
                 }else{
-                    edit_mode = 'province_edit'
+                    current_edit_mode = 'province_edit'
                     emptyProvinceStateList('disabled');
                     changeMultipleProvinceStates(Object.keys(province_objects), 'enabled');
                 }
+                break;
+            case 'multiple_province_edit':
+                updateProvinceMetadata(event_data.detail, {'owner' : paint_nation_id});
+                updateProvinceRender(event_data.detail);
                 break;
         }
     });
     
 
-    province_editor.addEventListener('edit_province_neighbors', () =>  {
-        switch(edit_mode){
-            case 'province_edit':
-                edit_mode = 'neighbor_edit';
+    province_editor.addEventListener('input_mode_change', (event) =>  {
+        if(current_edit_mode == event.detail){
+            emptyProvinceStateList('disabled');
+            changeMultipleProvinceStates(Object.keys(province_objects), 'enabled');
+            selected_province_id = original_province_id;
+            current_edit_mode = 'province_edit';
+            return;
+        }
+        switch(event.detail){
+            case 'neighbor_edit':
                 original_province_id = selected_province_id;
                 focusProvince(selected_province_id);
                 break;
-            case 'neighbor_edit':
-                edit_mode = 'province_edit'
+            case 'multiple_province_edit':
                 emptyProvinceStateList('disabled');
-                changeMultipleProvinceStates(Object.keys(province_objects), 'enabled');
-                selected_province_id = original_province_id;
                 break;
         }
+        current_edit_mode = event.detail;
     });
 
     province_editor.addEventListener('save_province_edits', () => {
-        map_metadata.province_info[selected_province_id] = {
+        let new_province_data = {
             'owner' : province_editor.querySelector('#province_owner').value,
             'full_name' : province_editor.querySelector('#province_full_name').value,
-            'troop_presence' : province_editor.querySelector('#province_troops').checked,
-            'token_location' : {'x' : province_editor.querySelector('#cop_x').value, 'y' : province_editor.querySelector('#cop_y').value},
-            'region_type' : map_metadata.province_info[selected_province_id].region_type,
-            'neighbors' : map_metadata.province_info[selected_province_id].neighbors
+            'troop_presence' : (province_editor.querySelector('#province_troops').value != 'N/A')?province_editor.querySelector('#province_troops').value:null,
+            'token_location' : {'x' : province_editor.querySelector('#cop_x').value, 'y' : province_editor.querySelector('#cop_y').value}
         };
-        if(province_editor.querySelector('#province_is_key').checked && !map_metadata.key_provinces.includes(selected_province_id)){
-            map_metadata.key_provinces.push(selected_province_id);
-        }else if(!province_editor.querySelector('#province_is_key').checked && map_metadata.key_provinces.includes(selected_province_id)){
-            map_metadata.key_provinces = map_metadata.key_provinces.filter(key_province_id => key_province_id != selected_province_id);
-        }
+        
+        updateProvinceMetadata(selected_province_id, new_province_data, !(province_editor.querySelector('#province_is_key').checked && map_metadata.key_provinces.includes(selected_province_id)))
         updateProvinceRender(selected_province_id);
+        document.dispatchEvent(new CustomEvent('province_select', {'detail':selected_province_id}));
     });
+
     let stronghold_visualizer = document.getElementById('key_visualize');
     stronghold_visualizer.disabled = false;
     stronghold_visualizer.addEventListener('click', () => {
@@ -187,13 +185,8 @@ document.addEventListener('map_setup_complete', () => {
     })
 })
 
-function editProvinceNeighbors(){
-    document.getElementById('province_editor_controls').dispatchEvent(new CustomEvent('edit_province_neighbors'));
-}
+
 
 function modifyProvince(){
     document.getElementById('province_editor_controls').dispatchEvent(new CustomEvent('save_province_edits'));
-}
-function exportMetadata(){
-
 }

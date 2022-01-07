@@ -116,15 +116,18 @@ function loadMetadata(){
         get_text_resource('/game_files/europa.json').then(data => {
             map_metadata = JSON.parse(data);
             console.log(map_metadata);
+            Object.keys(map_metadata.province_info).forEach(province_id => {
+                if (map_metadata.province_info[province_id].owner != 'N/A'){
+                    province_objects[province_id].style.fill = map_metadata.nation_info[map_metadata.province_info[province_id].owner].color;
+                    province_objects[province_id].style.stroke = map_metadata.nation_info[map_metadata.province_info[province_id].owner].stroke_color;
+                }
+            })
             for(nation_id in map_metadata.nation_info){
-                map_metadata.nation_info[nation_id].provinces.forEach(province_id => {
-                    province_objects[province_id].style.fill = map_metadata.nation_info[nation_id].color;
-                    province_objects[province_id].style.stroke = map_metadata.nation_info[nation_id].stroke_color;
-                })
                 map_metadata.nation_info[nation_id].troops_deployed.forEach(province_id => {
                     //It may be smarter to do this later
                     // Firstly, because the graphic for troops aren't even loaded yet
                     // Secondly, because there's no guarantee that the game is on turn 1
+
                 })
             }
             console.log('STEP 2');
@@ -191,6 +194,34 @@ function focusProvince(province_id){
     changeMultipleProvinceStates(non_disabled, 'enabled');
     non_disabled.push(province_id);
     changeMultipleProvinceStates(Array.from(Object.keys(map_metadata.province_info)).filter(other_province_id => !non_disabled.includes(other_province_id)), 'disabled');
+}
+
+
+function updateProvinceMetadata(province_id, new_data, change_in_province_status = false){
+    map_metadata.province_info[province_id] = {...map_metadata.province_info[province_id], ...new_data};
+    if(change_in_province_status){
+        if(document.getElementById('province_is_key').checked){
+            map_metadata.key_provinces.push(province_id);
+        }else{
+            map_metadata.key_provinces = map_metadata.key_provinces.filter(key_province_id => key_province_id != province_id);
+        }
+    }
+}
+
+function updateProvinceRender(province_id){
+    let relevant_province_info = map_metadata.province_info[province_id];
+    console.log(relevant_province_info);
+    province_objects[province_id].style.fill = (relevant_province_info.owner == 'N/A')?null:map_metadata.nation_info[relevant_province_info.owner].color;
+    province_objects[province_id].style.stroke = (relevant_province_info.owner == 'N/A')?null:map_metadata.nation_info[relevant_province_info.owner].stroke_color
+    
+    if(!graphic_holder.star[province_id] && map_metadata.key_provinces.includes(province_id)){
+        createAdditionalStar(province_id);
+    }else if(graphic_holder.star[province_id] && !map_metadata.key_provinces.includes(province_id)){
+        deleteStar(province_id);
+    }else if(graphic_holder.star[province_id]){
+        graphic_holder.star[province_id].setAttribute('x', relevant_province_info.token_location.x);
+        graphic_holder.star[province_id].setAttribute('y', relevant_province_info.token_location.y);
+    }
 }
 
 window.addEventListener('load', setup_game);
