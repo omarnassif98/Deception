@@ -11,8 +11,7 @@ if (!firebase.apps.length){
   };
   firebase.initializeApp(firebaseConfig);
 }
-const auth = firebase.auth();
-auth.useEmulator('http://localhost:5555');
-auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
-const database = firebase.database();
-database.useEmulator('http://localhost:5553');
+firebase.auth().useEmulator('http://localhost:5555');
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+firebase.database().useEmulator('http://localhost:5553');
+firebase.functions().useEmulator("http://localhost:5554");

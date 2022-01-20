@@ -4,7 +4,7 @@
     top: 0;
     right: 0;
     left: 0;
-    background-color: #7F627F;
+    background-color: var(--accent-color);
     padding: .6em 0;
     
 }
@@ -49,10 +49,6 @@
     display: none;
 }
 
-#modal:target{
-    display: table;
-}
-
 #modal_placeholder{
     background-color: rgba(0, 0, 0, 0.5);
     animation-name: reveal_modal;
@@ -64,20 +60,57 @@
 #modal_container{
     background-color: #E8E8E8;
     margin: auto;
-    width: min(35em, 40%);
-    padding-bottom: 3em;
+    width: 20em;
+    height: 24em;
+    border-radius: 1.3em;
 }
 
-.modal_input{
-    display: block;
-    margin: 1.5em;
+.input_wrapper{
+    margin: auto;
 }
+
 
 .form_container{
     margin: 2em;
     border: 1px solid black;
+    height: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 header{
-    background-color: #FD7435;
+    background-color: var(--secondary-color);
+    border-radius: 1.3em 1.3em 0 0;
+}
+
+header a{
+    display: inline-block;
+    padding: .4em;
+}
+
+header span{
+    display: inline-block;
+    cursor: default;
+}
+
+#modal_dismiss_button{
+    cursor: pointer;
+}
+#auth_selector{
+    width: fit-content;
+    margin: auto;
+    margin-top: 2em;
+}
+
+#auth_selector span{
+    padding: 0.4em;
+    background-color: #D6D6D6;
+    margin: 0;
+    transition: 0.4s all;
+}
+
+#auth_selector span.selected{
+    color: #E8E8E8;
+    background-color: #7F627F;
 }

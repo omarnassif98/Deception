@@ -6,15 +6,20 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites" : [
+    "rewrites": [
       {
-        "source" : "/browse",
-        "destination" : "/browse_listings.html"
+        "source": "/browse",
+        "destination": "/browse_listings.html"
       },
       {
-        "source" : "/sandbox",
-        "destination" : "/sandbox.html"
-      }]
+        "source": "/sandbox",
+        "destination": "/sandbox.html"
+      },
+      {
+        "source": "/game",
+        "destination": "/game.html"
+      }
+    ]
   },
   "emulators": {
     "auth": {
@@ -32,9 +37,15 @@
     "ui": {
       "enabled": true,
       "port": 5551
+    },
+    "firestore": {
+      "port": 4449
     }
   },
   "database": {
     "rules": "database.rules.json"
+  },
+  "functions": {
+    "source": "functions"
   }
 }
