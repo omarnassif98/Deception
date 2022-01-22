@@ -2,22 +2,51 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style/sitewide.css">
-    <link rel="stylesheet" href="style/navbar.css">
     <link rel="stylesheet" href="style/browse.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script src="scripts/business_logic/firebase/FirebaseInitializer.js"></script>
-    <script src="scripts/business_logic/firebase/FirebaseAuthManager.js"></script>
-    <script src="scripts/business_logic/website/Navbar.js"></script>
+    <script src="scripts/business_logic/website/Deployer.js"></script>
     <script src="scripts/business_logic/website/Browse.js"></script>
-    
     <title>Browse Games</title>
 </head>
-<body>
+<body wait_for_nav="create_game_button" modal_extras="">
     <h1>LETS BROWSE SOME GAMES</h1>
     <div class="content_bubble">
         <h2>Existing Games</h2>
+        <hr>
+        <button style="display: none;" id="create_game_button" class="site_button" onclick="focusModal('game_create')">Create Game</button>
+    </div>
+
+    <div id="extra_modals">
+        <div id="game_create_mode" style="display: none" prompt="Create a game">
+                <div id='game_create_form' class="form_container">  
+                    <div class="form_input_wrapper">
+                        <input type="text" id="game_name_input" class="text_entry" placeholder="Lobby Name">
+                        <span id="game_name_error" class="text_input_error">ERROR</span>
+                    </div>
+                    
+                    
+                    <div class="form_input_wrapper">
+                        <label for="private_game">Private Lobby?</label>
+                        <input type="checkbox" name="private_game" id="private_game_checkbox" onclick="document.getElementById('game_password_wrapper').style.display = (this.checked)?'block':'none'"">
+                        <div id="game_password_wrapper" style="display: none;">
+                            <input type="password" id="game_password_input" class="text_entry" placeholder="Lobby Password">
+                            <span id="password_error" class="text_input_error">ERROR</span>
+                        </div>
+                    </div>
+
+                    <div class="form_input_wrapper">
+                        <h3>Choose a nation to control</h3>
+                        <div id="nation_select" val="FRA" class="side_by_side_selector">
+                            <span id="FRA" class="selected" onclick="changeSideSelectorValue(this)">The French Republic</span>
+                            <span id="BRI" onclick="changeSideSelectorValue(this)">The United Kingdom</span>
+                            <span id="AUS" onclick="changeSideSelectorValue(this)">The Austro-Hungarian Empire</span>
+                            <span id="GER" onclick="changeSideSelectorValue(this)">The German Empire</span>
+                            <span id="TUR" onclick="changeSideSelectorValue(this)">The Ottoman Empire</span>
+                            <span id="RUS" onclick="changeSideSelectorValue(this)">The Russian Empire</span>    
+                        </div>
+                    </div>
+                </div>
+                <button onclick="createGameLobby()" style="float: right;">Let's Do This</button>
+        </div>
     </div>
 </body>
 </html>

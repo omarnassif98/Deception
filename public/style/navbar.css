@@ -1,6 +1,6 @@
 #navbar{
     position: sticky;
-    display: flex;
+    display: flex !important;
     top: 0;
     right: 0;
     left: 0;
@@ -58,10 +58,10 @@
 }
 
 #modal_container{
-    background-color: #E8E8E8;
+    background-color: var(--carte-color);
     margin: auto;
-    width: 20em;
-    height: 24em;
+    width: 30em;
+    height: 34em;
     border-radius: 1.3em;
 }
 
@@ -73,10 +73,20 @@
 .form_container{
     margin: 2em;
     border: 1px solid black;
-    height: 10em;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    height: 20em;
+}
+
+.form_input_wrapper{
+    line-height: 0.4em;
+    text-align: center;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+    margin: auto;
+    width: fit-content;
+    border-radius: 0.3em;
 }
 
 header{
@@ -97,20 +107,27 @@ header span{
 #modal_dismiss_button{
     cursor: pointer;
 }
-#auth_selector{
-    width: fit-content;
+.side_by_side_selector{
     margin: auto;
-    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-#auth_selector span{
+.side_by_side_selector span{
     padding: 0.4em;
     background-color: #D6D6D6;
-    margin: 0;
+    margin: 0.2em;
     transition: 0.4s all;
+    line-height: 2em;
+    white-space: pre-wrap;
 }
 
-#auth_selector span.selected{
+.side_by_side_selector span:hover{
+    cursor: pointer;
+}
+
+.side_by_side_selector span.selected{
     color: #E8E8E8;
     background-color: #7F627F;
 }

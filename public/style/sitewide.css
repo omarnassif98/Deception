@@ -4,14 +4,13 @@
     --offtone-primary-color: #92AAD6;
     --accent-color: #564256;
     --secondary-color: #FC814A;
-
-
-
+    --carte-color: #E8E8E8;
 }
 
 html, body{
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
 body{
     margin: 0;
@@ -27,12 +26,11 @@ footer{
     display: flex;
     margin-top: 20px;
     flex-flow: column;
+    margin: auto;
+    width: 80%;
+    border-radius: 1em;
 }
 
-.form_input_wrapper{
-    margin: 0.5em 0 0.5em 1.5em;
-    line-height: 0.4em;
-}
 
 .text_entry{
     background-color: transparent;
@@ -42,21 +40,23 @@ footer{
     transition: all 0.3s;
     width: 13em;
     display: block;
+    margin: auto;
 }
 
 .text_entry:focus{
     border-bottom: 2px solid var(--secondary-color);
     width: 16em;
-    margin-left: 0.25em;
 }
 
 .text_entry.input_error{
     border-color: var(--error-color);
 }
+
 .text_input_error{
     font-size: 7pt;
     color: var(--error-color);
     white-space: pre-wrap;
     transition: all 0.3ms;
     opacity: 0;
+    line-height: 0.4em;
 }

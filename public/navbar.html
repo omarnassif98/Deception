@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+    <head scripts_to_deploy="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js scripts/business_logic/firebase/FirebaseInitializer.js scripts/business_logic/firebase/FirebaseAuthManager.js scripts/business_logic/website/CustomComponents.js">
+        <link rel="stylesheet" href="style/navbar.css">
+    </head>
     <body>
-        <div id='navbar'>
+        <div id='navbar' style="display: none;">
             <div class="navbar_item">
                 <span>Option 1</span>
             </div>
@@ -15,7 +18,7 @@
             </div>
         </div id='navbar'>
 
-        <div id='modal'>
+        <div id='modal' style="display: none;">
             <div id='modal_placeholder'>
                 <div id='modal_container'>
                     <header>
@@ -25,9 +28,9 @@
                     </header>
                     <div id="auth_mode" style="display: none;" prompt="Let's get you logged in">
                         <div>
-                            <div id="auth_selector" val="login">
-                                <span val="login" class="selected" onclick="changeAuthenticationMode(this, this.nextElementSibling)">Log In</span>
-                                <span val="signup" onclick="changeAuthenticationMode(this, this.previousElementSibling)">Sign Up</span>
+                            <div id="auth_selector" val="login" class="side_by_side_selector">
+                                <span id="login" class="selected" onclick="changeSideSelectorValue(this); document.getElementById('auth_verify_wrapper').style.display = 'none';">Log In</span>
+                                <span id="signup" onclick="changeSideSelectorValue(this); document.getElementById('auth_verify_wrapper').style.display = 'block';">Sign Up</span>
                             </div>
 
                             <div id='auth_form' class="form_container">  
@@ -41,7 +44,7 @@
                                     <span id="password_error" class="text_input_error">ERROR</span>
                                 </div>
 
-                                <div style="display: none;" class="form_input_wrapper">
+                                <div style="display: none;" id="auth_verify_wrapper" class="form_input_wrapper">
                                     <input type="password" id="verify_input" class="text_entry" placeholder="Confirm Password">
                                     <span id="verify_error" class="text_input_error">ERROR</span>
                                 </div>
@@ -50,7 +53,7 @@
                         </div>
                     </div>
                     <div id="profile_mode" style="display: none;" prompt="First things first.<br>Some introductions">
-                        <div class="form_container">
+                        <div id="prof_form" class="form_container">
                             <div id="prof_dname_wrapper" class="form_input_wrapper">
                                 <input type="text" id="dname_input" class="text_entry" placeholder="Display name"> 
                                 <span id="dname_error" class="text_input_error">ERROR</span>
@@ -61,7 +64,7 @@
                                 <input type="checkbox" name="prof_beginner" id="prof_beginner" checked>
                             </div>
                         </div>
-                        <button onclick="">All done</button>
+                        <button onclick="submitProfileData()">All done</button>
                     </div>
                 </div>
             </div>
