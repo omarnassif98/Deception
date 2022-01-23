@@ -19,8 +19,8 @@
         <div id="game_create_mode" style="display: none" prompt="Create a game">
                 <div id='game_create_form' class="form_container">  
                     <div class="form_input_wrapper">
-                        <input type="text" id="game_name_input" class="text_entry" placeholder="Lobby Name">
-                        <span id="game_name_error" class="text_input_error">ERROR</span>
+                        <input type="text" id="name_input" class="text_entry" placeholder="Lobby Name">
+                        <span id="name_error" class="text_input_error">ERROR</span>
                     </div>
                     
                     
@@ -28,7 +28,7 @@
                         <label for="private_game">Private Lobby?</label>
                         <input type="checkbox" name="private_game" id="private_game_checkbox" onclick="document.getElementById('game_password_wrapper').style.display = (this.checked)?'block':'none'"">
                         <div id="game_password_wrapper" style="display: none;">
-                            <input type="password" id="game_password_input" class="text_entry" placeholder="Lobby Password">
+                            <input type="password" id="password_input" class="text_entry" placeholder="Lobby Password">
                             <span id="password_error" class="text_input_error">ERROR</span>
                         </div>
                     </div>
