@@ -13,6 +13,7 @@ if (!firebase.apps.length){
 }
 firebase.auth().useEmulator('http://localhost:5555');
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-firebase.database().useEmulator('http://localhost:5553');
+firebase.database().useEmulator("localhost","5553");
 firebase.functions().useEmulator("localhost", "5554");
-firebase.firestore().useEmulator("localhost", "5556");
+firebase.firestore().useEmulator("localhost", "5550");
+document.dispatchEvent(new Event('firebase_init'))

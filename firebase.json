@@ -16,7 +16,7 @@
         "destination": "/sandbox.html"
       },
       {
-        "source": "/game",
+        "source": "/game/**",
         "destination": "/game.html"
       }
     ]
@@ -39,7 +39,7 @@
       "port": 5551
     },
     "firestore": {
-      "port": 5556
+      "port": 5550
     }
   },
   "database": {

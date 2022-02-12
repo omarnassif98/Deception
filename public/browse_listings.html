@@ -8,13 +8,22 @@
     <title>Browse Games</title>
 </head>
 <body wait_for_nav="create_game_button" modal_extras="">
-    <h1>LETS BROWSE SOME GAMES</h1>
-    <div class="content_bubble">
-        <h2>Existing Games</h2>
+    <h1>Browse</h1>
+
+    <div class="content_bubble" id="user_games" style="display: none;">
+        <h2>Your ongoing games</h2>
         <hr>
-        <button style="display: none;" id="create_game_button" class="site_button" onclick="focusModal('game_create')">Create Game</button>
+        <div id="user_games_carousel" class="game_listing_carousel">
+
+        </div>
     </div>
 
+    <div class="content_bubble">
+        <h2>Lobbies looking for players</h2>
+        <hr>
+    </div>
+    <button style="display: none;" id="create_game_button" class="site_button" onclick="focusModal('game_create')">Create Game</button>
+    
     <div id="extra_modals">
         <div id="game_create_mode" style="display: none" prompt="Create a game">
                 <div id='game_create_form' class="form_container">  
@@ -45,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="createGameLobby()" style="float: right;">Let's Do This</button>
+                <button onclick="userCreateGameLobby()" style="float: right;">Let's Do This</button>
         </div>
     </div>
 </body>

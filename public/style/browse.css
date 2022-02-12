@@ -1,4 +1,37 @@
+.game_listing_carousel{
+    display: flex;
+    padding: 1.2em;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .game_listing{
-    background-color: bisque;
+    background-color: var(--carte-color);
+    width: 16em;
+    height: 10em;
+    padding: 1em;
+    border-radius: 1.2em;
+    margin: 0.7em;
 }
 
+.game_join_link{
+    display: block;
+    width: 7em;
+    padding: 2em;
+    margin: auto;
+    margin-top: 3em;
+    border-radius: 0.3em;
+    background-color: var(--offtone-primary-color);
+    text-decoration: none;
+    color: black;
+}
+
+.game_join_link:hover{
+    cursor : pointer;
+    background-color: var(--primary-color);
+}
+
+.game_join_link:visited{
+    text-decoration: none;
+    color: black;
+}

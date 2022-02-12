@@ -14,7 +14,16 @@ function deleteStar(province_id){
 
 
 
-
+function updateProvinceMetadata(province_id, new_data, change_in_province_status = false){
+    map_metadata.province_info[province_id] = {...map_metadata.province_info[province_id], ...new_data};
+    if(change_in_province_status){
+        if(document.getElementById('province_is_key').checked){
+            map_metadata.key_provinces.push(province_id);
+        }else{
+            map_metadata.key_provinces = map_metadata.key_provinces.filter(key_province_id => key_province_id != province_id);
+        }
+    }
+}
 
 document.addEventListener('map_setup_complete', () => {
     console.log('STEP 4');

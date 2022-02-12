@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style/sitewide.css">
-    <link rel="stylesheet" href="style/game.css">
-    <script src="scripts/helper.js"></script>
-    <script src="scripts/business_logic/website/Deployer.js"></script>
-    <script src="scripts/game_engine/MapManager.js"></script>
-    <script src="scripts/game_engine/GameManager.js"></script>
+    <link rel="stylesheet" href="/style/sitewide.css">
+    <link rel="stylesheet" href="/style/game.css">
+    <link rel="stylesheet" href="/style/sidebar.css">
+    <script src="/scripts/helper.js"></script>
+    <script src="/scripts/business_logic/website/Deployer.js"></script>
+    <script src="/scripts/game_engine/SidebarManager.js"></script>
+    <script src="/scripts/game_engine/MapManager.js"></script>
+    <script src="/scripts/game_engine/GameManager.js"></script>
     
     <title>Deception</title>
 </head>
@@ -15,9 +17,18 @@
         <h1 style="margin: 0; height: 10%;">Game Screen</h1>
         <div id="game_wrapper">
             <div id="side_panel">
+                <div id="side_panel_curtain" class="content_curtain">
+                    <span class="curtain_message">
+                        Setting up
+                    </span>
+                </div>
             </div>
             <div id="game_area">
-
+                <div id="game_curtain" class="content_curtain">
+                    <span class="curtain_message">
+                        Setting up
+                    </span>
+                </div>
             </div>   
         </div>
     </div>

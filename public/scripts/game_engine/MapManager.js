@@ -22,6 +22,8 @@ function loadMap(){
             let parser = new DOMParser();
             let map_dom = parser.parseFromString(raw_svg, 'image/svg+xml');
             let content = map_dom.getElementById('gameMap');
+            console.log('release curtain');
+            releaseCurtain('game_curtain');
             map_wrapper.appendChild(content);
             
             
@@ -45,9 +47,15 @@ function loadMap(){
                 content.setAttribute('viewBox', `${view_settings.x} ${view_settings.y} ${view_settings.width} ${view_settings.height}`);
             }
             
+            let calculateMaxZoom = () => {
+
+                let projection_factors = {'x' : (map_wrapper.clientWidth**2)/(map_wrapper.clientWidth*view_settings.max_x), 'y' : (map_wrapper.clientHeight**2)/(map_wrapper.clientHeight*view_settings.max_y)};
+                let correct_factor = (projection_factors.x > projection_factors.y)?projection_factors.x:projection_factors.y;
+                view_settings.zoom_max = 1/correct_factor;
+            };
+            
             calculateProjections();
-            
-            
+            calculateMaxZoom();
             let mouse_settings = {'mouse_down' : false, 'user_is_panning' : false, 'last_tracked_mouse_pos' : {'x' : null, 'y' : null}}
             
             //ensures that the value is between the minimum and maximum 
@@ -86,11 +94,14 @@ function loadMap(){
                 
                 content.addEventListener('mouseup', resetPan);
                 content.addEventListener('mouseleave', resetPan);
-                window.addEventListener('resize', calculateProjections);
+                window.addEventListener('resize', () => {
+                    calculateProjections()
+                    calculateMaxZoom()
+                });
                 
-                //zoom is modified by scrolling
+                //zoom is modified by scrolling, clamped between 100% and 15%
                 content.addEventListener('wheel', (event_data) => {
-                    view_settings.zoom_level = clamp(view_settings.zoom_level + event_data.deltaY * user_settings.scroll_sensitivity, 0.15, 1)
+                    view_settings.zoom_level = clamp(view_settings.zoom_level + event_data.deltaY * user_settings.scroll_sensitivity, 0.15, view_settings.zoom_max)
                     calculateProjections();
                 });
                 
@@ -197,16 +208,7 @@ function focusProvince(province_id){
 }
 
 
-function updateProvinceMetadata(province_id, new_data, change_in_province_status = false){
-    map_metadata.province_info[province_id] = {...map_metadata.province_info[province_id], ...new_data};
-    if(change_in_province_status){
-        if(document.getElementById('province_is_key').checked){
-            map_metadata.key_provinces.push(province_id);
-        }else{
-            map_metadata.key_provinces = map_metadata.key_provinces.filter(key_province_id => key_province_id != province_id);
-        }
-    }
-}
+
 
 function updateProvinceRender(province_id){
     let relevant_province_info = map_metadata.province_info[province_id];

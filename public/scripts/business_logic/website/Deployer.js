@@ -1,5 +1,5 @@
 window.onload = function(){
-  return fetch(`navbar.html`).then(res => {
+  return fetch(`/navbar.html`).then(res => {
     console.log(res);
     res.text().then(contents => {
       let dom_to_deploy = new DOMParser().parseFromString(contents, 'text/html');

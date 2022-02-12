@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-    <head scripts_to_deploy="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js scripts/business_logic/firebase/FirebaseInitializer.js scripts/business_logic/firebase/FirebaseAuthManager.js scripts/business_logic/website/CustomComponents.js">
-        <link rel="stylesheet" href="style/navbar.css">
+    <head scripts_to_deploy="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js /scripts/business_logic/firebase/FirebaseInitializer.js /scripts/business_logic/firebase/FirebaseAuthManager.js /scripts/business_logic/website/CustomComponents.js /scripts/business_logic/firebase/auth.test.js">
+        <link rel="stylesheet" href="/style/navbar.css">
     </head>
     <body>
         <div id='navbar' style="display: none;">
@@ -26,32 +26,6 @@
                         <span id="modal_header_prompt" style="margin: .4em; font-size: x-large">Prompt</span>
                         <hr>
                     </header>
-                    <div id="auth_mode" style="display: none;" prompt="Let's get you logged in">
-                        <div>
-                            <div id="auth_selector" val="login" class="side_by_side_selector">
-                                <span id="login" class="selected" onclick="changeSideSelectorValue(this); document.getElementById('auth_verify_wrapper').style.display = 'none';">Log In</span>
-                                <span id="signup" onclick="changeSideSelectorValue(this); document.getElementById('auth_verify_wrapper').style.display = 'block';">Sign Up</span>
-                            </div>
-
-                            <div id='auth_form' class="form_container">  
-                                <div class="form_input_wrapper">
-                                    <input type="text" id="email_input" class="text_entry" placeholder="Email">
-                                    <span id="email_error" class="text_input_error">ERROR</span>
-                                </div>
-                                
-                                <div class="form_input_wrapper">
-                                    <input type="password" id="password_input" class="text_entry" placeholder="Password">
-                                    <span id="password_error" class="text_input_error">ERROR</span>
-                                </div>
-
-                                <div style="display: none;" id="auth_verify_wrapper" class="form_input_wrapper">
-                                    <input type="password" id="verify_input" class="text_entry" placeholder="Confirm Password">
-                                    <span id="verify_error" class="text_input_error">ERROR</span>
-                                </div>
-                            </div>
-                            <button style="float: right; margin-right: 3em;" onclick="submitUserAutehentication()">All Done</button>
-                        </div>
-                    </div>
                     <div id="profile_mode" style="display: none;" prompt="First things first.<br>Some introductions">
                         <div id="prof_form" class="form_container">
                             <div id="prof_dname_wrapper" class="form_input_wrapper">
